@@ -39,10 +39,26 @@ function createNote(id, content, fixed) {
   const textarea = document.createElement("textarea");
   textarea.value = content;
   textarea.placeholder = "Adicione algum texto...";
-
   element.appendChild(textarea);
 
+  const pinIcon = document.createElement("i");
+  pinIcon.classList.add(...["bi", "bi-pin"]);
+  element.appendChild(pinIcon);
+
+  element.querySelector(".bi-pin").addEventListener("click", () => {
+    toggleFixNote(id);
+  });
+
   return element;
+}
+
+function toggleFixNote(id) {
+  const notes = getNotes();
+  const targetNote = notes.filter((note) => note.id === id)[0];
+
+  targetNote.fixed = !targetNote.fixed;
+
+  console.log(notes)
 }
 
 function getNotes() {
