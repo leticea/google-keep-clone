@@ -20,6 +20,14 @@ function addNote() {
   noteInput.value = "";
 }
 
+function showNotes() {
+  getNotes().forEach((note) => {
+    const noteElement = createNote(note.id, note.content, note.fixed);
+
+    notesContainer.appendChild(noteElement);
+  });
+}
+
 function generateId() {
   return Math.floor(Math.random() * 5000);
 }
@@ -37,8 +45,16 @@ function createNote(id, content, fixed) {
   return element;
 }
 
+function getNotes() {
+  const notes = JSON.parse(localStorage.getItem("notes") || "[]");
+
+  return notes;
+}
+
 function saveNotes(notes) {
   localStorage.setItem("notes", JSON.stringify(notes));
 }
 
 addNoteBtn.addEventListener("click", () => addNote());
+
+showNotes();
