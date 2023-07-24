@@ -21,11 +21,17 @@ function addNote() {
 }
 
 function showNotes() {
+  cleanNotes();
+
   getNotes().forEach((note) => {
     const noteElement = createNote(note.id, note.content, note.fixed);
 
     notesContainer.appendChild(noteElement);
   });
+}
+
+function cleanNotes() {
+  notesContainer.replaceChildren([]);
 }
 
 function generateId() {
@@ -45,6 +51,10 @@ function createNote(id, content, fixed) {
   pinIcon.classList.add(...["bi", "bi-pin"]);
   element.appendChild(pinIcon);
 
+  if (fixed) {
+    element.classList.add("fixed");
+  }
+
   element.querySelector(".bi-pin").addEventListener("click", () => {
     toggleFixNote(id);
   });
@@ -58,13 +68,17 @@ function toggleFixNote(id) {
 
   targetNote.fixed = !targetNote.fixed;
 
-  console.log(notes)
+  saveNotes(notes);
+
+  showNotes();
 }
 
 function getNotes() {
   const notes = JSON.parse(localStorage.getItem("notes") || "[]");
 
-  return notes;
+  const orderedNotes = notes.sort((a, b) => (a.fixed > b.fixed ? -1 : 1));
+
+  return orderedNotes;
 }
 
 function saveNotes(notes) {
