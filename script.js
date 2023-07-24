@@ -3,7 +3,7 @@ const noteInput = document.querySelector("#note-content");
 const addNoteBtn = document.querySelector(".add-note");
 
 function addNote() {
-  const notes = [];
+  const notes = getNotes();
 
   const noteObject = {
     id: generateId(),
