@@ -71,6 +71,12 @@ function createNote(id, content, fixed) {
     deleteNote(id, element);
   });
 
+  element
+    .querySelector(".bi-file-earmark-plus")
+    .addEventListener("click", () => {
+      copyNote(id);
+    });
+
   return element;
 }
 
@@ -89,6 +95,28 @@ function deleteNote(id, element) {
 
   saveNotes(notes);
   notesContainer.removeChild(element);
+}
+
+function copyNote(id) {
+  const notes = getNotes();
+
+  const targetNote = notes.filter((note) => note.id === id)[0];
+
+  const noteObject = {
+    id: generateId(),
+    content: targetNote.content,
+    fixed: false,
+  };
+
+  const noteElement = createNote(
+    noteObject.id,
+    noteObject.content,
+    noteObject.fixed
+  );
+
+  notesContainer.appendChild(noteElement);
+  notes.push(noteObject);
+  saveNotes(notes);
 }
 
 function getNotes() {
