@@ -27,7 +27,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-App de anotações com a adição da nota, a edição, a remoção, a cópia, um filtro de busca e a exportação em CSV.
+App de anotações com a adição da nota, a edição, a remoção, podendo fixar, fazer uma cópia, um filtro de busca e a exportação em CSV.
 
 Aula do canal [Matheus Battisti](https://www.youtube.com/watch?v=TtDi0xrEvAE)
 
